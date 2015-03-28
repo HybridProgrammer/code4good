@@ -12,6 +12,7 @@ class Profile {
     String phone
     String firstName
     String lastName
+    String email
 
     User user
 }
