@@ -4,9 +4,9 @@ package org.code4good
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(QueueController)
-@Mock(Conversation)
-class QueueControllerSpec extends Specification {
+@TestFor(TwilloMessageController)
+@Mock(TwilloMessage)
+class TwilloMessageControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -20,8 +20,8 @@ class QueueControllerSpec extends Specification {
         controller.index()
 
         then: "The model is correct"
-        !model.queueInstanceList
-        model.queueInstanceCount == 0
+        !model.twilloMessageInstanceList
+        model.twilloMessageInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -29,7 +29,7 @@ class QueueControllerSpec extends Specification {
         controller.create()
 
         then: "The model is correctly created"
-        model.queueInstance != null
+        model.twilloMessageInstance != null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -37,25 +37,25 @@ class QueueControllerSpec extends Specification {
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def queue = new Conversation()
-        queue.validate()
-        controller.save(queue)
+        def twilloMessage = new TwilloMessage()
+        twilloMessage.validate()
+        controller.save(twilloMessage)
 
         then: "The create view is rendered again with the correct model"
-        model.queueInstance != null
+        model.twilloMessageInstance != null
         view == 'create'
 
         when: "The save action is executed with a valid instance"
         response.reset()
         populateValidParams(params)
-        queue = new Conversation(params)
+        twilloMessage = new TwilloMessage(params)
 
-        controller.save(queue)
+        controller.save(twilloMessage)
 
         then: "A redirect is issued to the show action"
-        response.redirectedUrl == '/queue/show/1'
+        response.redirectedUrl == '/twilloMessage/show/1'
         controller.flash.message != null
-        Conversation.count() == 1
+        TwilloMessage.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -67,11 +67,11 @@ class QueueControllerSpec extends Specification {
 
         when: "A domain instance is passed to the show action"
         populateValidParams(params)
-        def queue = new Conversation(params)
-        controller.show(queue)
+        def twilloMessage = new TwilloMessage(params)
+        controller.show(twilloMessage)
 
         then: "A model is populated containing the domain instance"
-        model.queueInstance == queue
+        model.twilloMessageInstance == twilloMessage
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -83,11 +83,11 @@ class QueueControllerSpec extends Specification {
 
         when: "A domain instance is passed to the edit action"
         populateValidParams(params)
-        def queue = new Conversation(params)
-        controller.edit(queue)
+        def twilloMessage = new TwilloMessage(params)
+        controller.edit(twilloMessage)
 
         then: "A model is populated containing the domain instance"
-        model.queueInstance == queue
+        model.twilloMessageInstance == twilloMessage
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -97,28 +97,28 @@ class QueueControllerSpec extends Specification {
         controller.update(null)
 
         then: "A 404 error is returned"
-        response.redirectedUrl == '/queue/index'
+        response.redirectedUrl == '/twilloMessage/index'
         flash.message != null
 
 
         when: "An invalid domain instance is passed to the update action"
         response.reset()
-        def queue = new Conversation()
-        queue.validate()
-        controller.update(queue)
+        def twilloMessage = new TwilloMessage()
+        twilloMessage.validate()
+        controller.update(twilloMessage)
 
         then: "The edit view is rendered again with the invalid instance"
         view == 'edit'
-        model.queueInstance == queue
+        model.twilloMessageInstance == twilloMessage
 
         when: "A valid domain instance is passed to the update action"
         response.reset()
         populateValidParams(params)
-        queue = new Conversation(params).save(flush: true)
-        controller.update(queue)
+        twilloMessage = new TwilloMessage(params).save(flush: true)
+        controller.update(twilloMessage)
 
         then: "A redirect is issues to the show action"
-        response.redirectedUrl == "/queue/show/$queue.id"
+        response.redirectedUrl == "/twilloMessage/show/$twilloMessage.id"
         flash.message != null
     }
 
@@ -129,23 +129,23 @@ class QueueControllerSpec extends Specification {
         controller.delete(null)
 
         then: "A 404 is returned"
-        response.redirectedUrl == '/queue/index'
+        response.redirectedUrl == '/twilloMessage/index'
         flash.message != null
 
         when: "A domain instance is created"
         response.reset()
         populateValidParams(params)
-        def queue = new Conversation(params).save(flush: true)
+        def twilloMessage = new TwilloMessage(params).save(flush: true)
 
         then: "It exists"
-        Conversation.count() == 1
+        TwilloMessage.count() == 1
 
         when: "The domain instance is passed to the delete action"
-        controller.delete(queue)
+        controller.delete(twilloMessage)
 
         then: "The instance is deleted"
-        Conversation.count() == 0
-        response.redirectedUrl == '/queue/index'
+        TwilloMessage.count() == 0
+        response.redirectedUrl == '/twilloMessage/index'
         flash.message != null
     }
 }

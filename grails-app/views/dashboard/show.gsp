@@ -1,5 +1,5 @@
 
-<%@ page import="org.code4good.Queue" %>
+<%@ page import="org.code4good.Conversation" %>
 <!DOCTYPE html>
 <html>
 	<head>

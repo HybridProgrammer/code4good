@@ -21,7 +21,7 @@ class Schedule {
 
     Date appointmentTime
     User createdBy
-    String caseNumber
+    Conversation caseNumber
     Profile client
     String appointmentNotes
     String perferredContactMethod

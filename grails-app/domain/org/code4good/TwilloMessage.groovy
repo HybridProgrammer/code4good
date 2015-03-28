@@ -6,5 +6,9 @@ class TwilloMessage {
     }
 
     Date sent
-    String messageId
+    String twilloMessageId
+    Boolean isOugoing
+    Boolean isSent
+
+    Conversation conversation
 }
