@@ -21,7 +21,7 @@
 </div>
 
 <div id="show-conversation" class="content scaffold-show" role="main">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+    <h1>Conversation History</h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -33,10 +33,8 @@
                         code="conversation.twilloMessages.label" default="Twillo Messages"/></span>
 
                 <g:each in="${conversationInstance.twilloMessages}" var="t">
-                    <g:if test="${t?.id} != null">
                     <span class="property-value" aria-labelledby="twilloMessages-label"><g:link
                             controller="twilloMessage" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-                    </g:if>
                 </g:each>
 
             </li>

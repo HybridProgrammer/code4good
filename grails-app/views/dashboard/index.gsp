@@ -24,9 +24,11 @@
         <thead>
         <tr>
 
-            <g:sortableColumn property="dateCreated" title="${message(code: 'conversation.dateCreated.label', default: 'Date Created')}" />
+            <g:sortableColumn property="phone" title="${message(code: 'conversation.owner.label', default: 'Owner')}" />
 
-            <g:sortableColumn property="phone" title="${message(code: 'conversation.lastUpdated.label', default: 'Phone #')}" />
+            <g:sortableColumn property="phone" title="${message(code: 'conversation.phone.label', default: 'Phone #')}" />
+
+            <g:sortableColumn property="dateCreated" title="${message(code: 'conversation.dateCreated.label', default: 'Date Created')}" />
 
         </tr>
         </thead>
@@ -34,9 +36,11 @@
         <g:each in="${conversationInstanceList}" status="i" var="conversationInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link action="show" id="${conversationInstance.id}">${fieldValue(bean: conversationInstance, field: "dateCreated")}</g:link></td>
+                <td><g:link action="showHistory" id="${conversationInstance.id}"><g:getOwner conversation="${conversationInstance}" /></g:link></td>
 
-                <td></td>
+                <td><g:link action="showHistory" id="${conversationInstance.id}">${conversationInstance.profile.phone}</g:link></td>
+
+                <td><g:link action="showHistory" id="${conversationInstance.id}">${fieldValue(bean: conversationInstance, field: "dateCreated")}</g:link></td>
 
             </tr>
         </g:each>

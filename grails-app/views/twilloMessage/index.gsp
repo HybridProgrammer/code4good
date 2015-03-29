@@ -26,6 +26,12 @@
 					
 						<th><g:message code="twilloMessage.conversation.label" default="Conversation" /></th>
 					
+						<g:sortableColumn property="isOugoing" title="${message(code: 'twilloMessage.isOugoing.label', default: 'Is Ougoing')}" />
+					
+						<g:sortableColumn property="isSent" title="${message(code: 'twilloMessage.isSent.label', default: 'Is Sent')}" />
+					
+						<g:sortableColumn property="messageText" title="${message(code: 'twilloMessage.messageText.label', default: 'Message Text')}" />
+					
 						<g:sortableColumn property="sent" title="${message(code: 'twilloMessage.sent.label', default: 'Sent')}" />
 					
 						<g:sortableColumn property="twilloMessageId" title="${message(code: 'twilloMessage.twilloMessageId.label', default: 'Twillo Message Id')}" />
@@ -37,6 +43,12 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${twilloMessageInstance.id}">${fieldValue(bean: twilloMessageInstance, field: "conversation")}</g:link></td>
+					
+						<td><g:formatBoolean boolean="${twilloMessageInstance.isOugoing}" /></td>
+					
+						<td><g:formatBoolean boolean="${twilloMessageInstance.isSent}" /></td>
+					
+						<td>${fieldValue(bean: twilloMessageInstance, field: "messageText")}</td>
 					
 						<td><g:formatDate date="${twilloMessageInstance.sent}" /></td>
 					

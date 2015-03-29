@@ -32,6 +32,33 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${twilloMessageInstance?.isOugoing}">
+				<li class="fieldcontain">
+					<span id="isOugoing-label" class="property-label"><g:message code="twilloMessage.isOugoing.label" default="Is Ougoing" /></span>
+					
+						<span class="property-value" aria-labelledby="isOugoing-label"><g:formatBoolean boolean="${twilloMessageInstance?.isOugoing}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${twilloMessageInstance?.isSent}">
+				<li class="fieldcontain">
+					<span id="isSent-label" class="property-label"><g:message code="twilloMessage.isSent.label" default="Is Sent" /></span>
+					
+						<span class="property-value" aria-labelledby="isSent-label"><g:formatBoolean boolean="${twilloMessageInstance?.isSent}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${twilloMessageInstance?.messageText}">
+				<li class="fieldcontain">
+					<span id="messageText-label" class="property-label"><g:message code="twilloMessage.messageText.label" default="Message Text" /></span>
+					
+						<span class="property-value" aria-labelledby="messageText-label"><g:fieldValue bean="${twilloMessageInstance}" field="messageText"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${twilloMessageInstance?.sent}">
 				<li class="fieldcontain">
 					<span id="sent-label" class="property-label"><g:message code="twilloMessage.sent.label" default="Sent" /></span>

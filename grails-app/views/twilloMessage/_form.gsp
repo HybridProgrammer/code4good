@@ -11,6 +11,33 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: twilloMessageInstance, field: 'isOugoing', 'error')} ">
+	<label for="isOugoing">
+		<g:message code="twilloMessage.isOugoing.label" default="Is Ougoing" />
+		
+	</label>
+	<g:checkBox name="isOugoing" value="${twilloMessageInstance?.isOugoing}" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: twilloMessageInstance, field: 'isSent', 'error')} ">
+	<label for="isSent">
+		<g:message code="twilloMessage.isSent.label" default="Is Sent" />
+		
+	</label>
+	<g:checkBox name="isSent" value="${twilloMessageInstance?.isSent}" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: twilloMessageInstance, field: 'messageText', 'error')} required">
+	<label for="messageText">
+		<g:message code="twilloMessage.messageText.label" default="Message Text" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="messageText" required="" value="${twilloMessageInstance?.messageText}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: twilloMessageInstance, field: 'sent', 'error')} required">
 	<label for="sent">
 		<g:message code="twilloMessage.sent.label" default="Sent" />
