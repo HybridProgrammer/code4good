@@ -38,46 +38,65 @@ class BootStrap {
                 enabled: true).save(failOnError: true)
 
         if (!user.authorities.contains(userRole)) {
-            UserRole.create adminUser, userRole
+            UserRole.create user, userRole
         }
 
-        user = User.findByUsername('socialworker2') ?: new User(
+        def user2 = User.findByUsername('socialworker2') ?: new User(
                 username: 'socialworker2',
                 //password: springSecurityService.encodePassword('admin'),
                 password: 'socialworker2',
                 enabled: true).save(failOnError: true)
 
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create adminUser, userRole
+        if (!user2.authorities.contains(userRole)) {
+            UserRole.create user, userRole
         }
 
         int twilloMessageID = 0
         Random random = new Random()
 
-        Profile.findByPhone("555-555-5555") ?: new Profile(phone: "555-555-5555").save(failOnError: true)
+        def profile1 = Profile.findByPhone("555-555-5555") ?: new Profile(phone: "555-555-5555").save(failOnError: true)
         def profile2 = Profile.findByPhone("555-555-5556") ?: new Profile(phone: "555-555-5556").save(failOnError: true)
+        def profile3 = Profile.findByPhone("111-111-1111") ?: new Profile(phone: "111-111-1111").save(failOnError: true)
+
+        Conversation conversation = new Conversation(profile: profile1, status: "Open", urgencyLevel: "Low").save(failOnError: true)
 
 
-        Conversation conversation = Conversation.findByProfileAndStatus(profile2, "Open") ?: new Conversation(profile: profile2, status: "Open", urgencyLevel: "High").save(failOnError: true)
+        TwilloMessage twilloMessage11 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "I need help", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+        TwilloMessage twilloMessage21 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "How do you cook ramen?", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+//        TwilloMessage twilloMessage2_1 = new TwilloMessage(isOugoing: true, isSent: true, messageText: "Please checkout goo.gl/Y8WXm9", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+//        TwilloMessage twilloMessage2_2 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "Thanks!", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+        conversation.addToTwilloMessages(twilloMessage11)
+        conversation.addToTwilloMessages(twilloMessage21)
+//        conversation.addToTwilloMessages(twilloMessage2_1)
+//        conversation.addToTwilloMessages(twilloMessage2_2)
+        conversation.save(failOnError: true)
+
+        Conversation conversationx = new Conversation(owner: user, profile: profile2, status: "Open", urgencyLevel: "High").save(failOnError: true)
 
 
         TwilloMessage twilloMessage1 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "I need help", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
         TwilloMessage twilloMessage2 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "Where can I find housing for the night?", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
-        conversation.addToTwilloMessages(twilloMessage1)
-        conversation.addToTwilloMessages(twilloMessage2)
-        conversation.save(failOnError: true)
+        TwilloMessage twilloMessage2_1 = new TwilloMessage(isOugoing: true, isSent: true, messageText: "Please checkout goo.gl/Y8WXm9", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+        TwilloMessage twilloMessage2_2 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "Thanks!", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+        conversationx.addToTwilloMessages(twilloMessage1)
+        conversationx.addToTwilloMessages(twilloMessage2)
+        conversationx.addToTwilloMessages(twilloMessage2_1)
+        conversationx.addToTwilloMessages(twilloMessage2_2)
+        conversationx.save(failOnError: true)
 
-        Conversation conversation2 = new Conversation(profile: profile2, status: "Open", urgencyLevel: "High").save(failOnError: true)
+        Conversation conversation2 = new Conversation(owner: user2, profile: profile3, status: "Open", urgencyLevel: "High").save(failOnError: true)
 
 
         TwilloMessage twilloMessage3 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "I don't know what to do", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
         TwilloMessage twilloMessage4 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "Is there someone I can talk to?", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
+        TwilloMessage twilloMessage4_1 = new TwilloMessage(isOugoing: true, isSent: true, messageText: "Yes, I can help. What seems to be the problem?", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
         conversation2.addToTwilloMessages(twilloMessage3)
         conversation2.addToTwilloMessages(twilloMessage4)
+        conversation2.addToTwilloMessages(twilloMessage4_1)
         conversation2.save(failOnError: true)
 
 
-        Conversation conversation3 = new Conversation(profile: profile2, status: "Closed", urgencyLevel: "High").save(failOnError: true)
+        Conversation conversation3 = new Conversation(owner: user, profile: profile3, status: "Closed", urgencyLevel: "High").save(failOnError: true)
 
 
         TwilloMessage twilloMessage5 = new TwilloMessage(isOugoing: false, isSent: false, messageText: "I don't know what to do", conversation: conversation, twilloMessageId: "code4good" + twilloMessageID++, sent: DateUtils.addMinutes(new Date(), random.nextInt(MAX_RANDOM_INT))).save(failOnError: true)
@@ -85,6 +104,9 @@ class BootStrap {
         conversation3.addToTwilloMessages(twilloMessage5)
         conversation3.addToTwilloMessages(twilloMessage6)
         conversation3.save(failOnError: true)
+
+        conversation2.owner = user
+        conversation2.save(failOnError: true)
 
 
 

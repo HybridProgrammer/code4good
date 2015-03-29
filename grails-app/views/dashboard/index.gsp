@@ -30,6 +30,8 @@
 
             <g:sortableColumn property="dateCreated" title="${message(code: 'conversation.dateCreated.label', default: 'Date Created')}" />
 
+            <g:sortableColumn property="Urgency" title="${message(code: 'conversation.dateCreated.label', default: 'Urgency Status')}" />
+
         </tr>
         </thead>
         <tbody>
@@ -41,6 +43,8 @@
                 <td><g:link action="showHistory" id="${conversationInstance.id}">${conversationInstance.profile.phone}</g:link></td>
 
                 <td><g:link action="showHistory" id="${conversationInstance.id}">${fieldValue(bean: conversationInstance, field: "dateCreated")}</g:link></td>
+
+                <td><g:link action="showHistory" id="${conversationInstance.id}">${fieldValue(bean: conversationInstance, field: "urgencyLevel")}</g:link></td>
 
             </tr>
         </g:each>

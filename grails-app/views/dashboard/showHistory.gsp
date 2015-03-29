@@ -29,13 +29,26 @@
 
         <g:if test="${conversationInstance?.twilloMessages}">
             <li class="fieldcontain">
-                <span id="twilloMessages-label" class="property-label"><g:message
-                        code="conversation.twilloMessages.label" default="Twillo Messages"/></span>
 
-                <g:each in="${conversationInstance.twilloMessages}" var="t">
-                    <span class="property-value" aria-labelledby="twilloMessages-label"><g:link
-                            controller="twilloMessage" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-                </g:each>
+                <table>
+                    <thead>
+                    <tr>
+
+                        <g:sortableColumn property="messageText" title="${message(code: 'conversation.dateCreated.label', default: 'Message')}" />
+
+                        <g:sortableColumn property="lastUpdated" title="${message(code: 'conversation.lastUpdated.label', default: 'Time')}" />
+
+                        <g:sortableColumn property="sentBy" title="${message(code: 'conversation.lastUpdated.label', default: 'Sent By')}" />
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                   <g:getMessages conversation="${conversationInstance}"></g:getMessages>
+
+                    </tbody>
+                </table>
+
 
             </li>
         </g:if>
@@ -46,10 +59,19 @@
                                                                          default="Owner"/></span>
 
                 <span class="property-value" aria-labelledby="owner-label"><g:link controller="user" action="show"
-                                                                                   id="${conversationInstance?.owner?.id}">${conversationInstance?.owner?.encodeAsHTML()}</g:link></span>
+                                                                                   id="${conversationInstance?.owner?.id}">${conversationInstance?.owner?.username?.encodeAsHTML()}</g:link></span>
 
             </li>
         </g:if>
+        <g:else>
+            <li class="fieldcontain">
+                <span id="owner-label" class="property-label"><g:message code="conversation.owner.label"
+                                                                         default="Owner"/></span>
+
+                <span class="property-value" aria-labelledby="owner-label">Unassigned</span>
+
+            </li>
+        </g:else>
 
         <g:if test="${conversationInstance?.dateCreated}">
             <li class="fieldcontain">
@@ -76,10 +98,10 @@
         <g:if test="${conversationInstance?.profile}">
             <li class="fieldcontain">
                 <span id="profile-label" class="property-label"><g:message code="conversation.profile.label"
-                                                                           default="Profile"/></span>
+                                                                           default="Phone Number"/></span>
 
                 <span class="property-value" aria-labelledby="profile-label"><g:link controller="profile" action="show"
-                                                                                     id="${conversationInstance?.profile?.id}">${conversationInstance?.profile?.encodeAsHTML()}</g:link></span>
+                                                                                     id="${conversationInstance?.profile?.id}">${conversationInstance?.profile?.phone?.encodeAsHTML()}</g:link></span>
 
             </li>
         </g:if>

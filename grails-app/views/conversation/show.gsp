@@ -29,15 +29,32 @@
 
         <g:if test="${conversationInstance?.twilloMessages}">
             <li class="fieldcontain">
-                <span id="twilloMessages-label" class="property-label"><g:message
-                        code="conversation.twilloMessages.label" default="Twillo Messages"/></span>
 
-                <g:each in="${conversationInstance.twilloMessages}" var="t">
-                    <g:if test="${t?.id} != null">
-                    <span class="property-value" aria-labelledby="twilloMessages-label"><g:link
-                            controller="twilloMessage" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-                    </g:if>
-                </g:each>
+                <table>
+                    <thead>
+                    <tr>
+
+                        <g:sortableColumn property="messageText" title="${message(code: 'conversation.dateCreated.label', default: 'Message')}" />
+
+                        <g:sortableColumn property="lastUpdated" title="${message(code: 'conversation.lastUpdated.label', default: 'Time')}" />
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+
+
+
+                        <td>Hello how are you?</td>
+
+                        <td>3/30/3015 12:00 PM</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
 
             </li>
         </g:if>
@@ -78,10 +95,10 @@
         <g:if test="${conversationInstance?.profile}">
             <li class="fieldcontain">
                 <span id="profile-label" class="property-label"><g:message code="conversation.profile.label"
-                                                                           default="Profile"/></span>
+                                                                           default="Phone Number"/></span>
 
                 <span class="property-value" aria-labelledby="profile-label"><g:link controller="profile" action="show"
-                                                                                     id="${conversationInstance?.profile?.id}">${conversationInstance?.profile?.encodeAsHTML()}</g:link></span>
+                                                                                     id="${conversationInstance?.profile?.id}">${conversationInstance?.profile?.phone?.encodeAsHTML()}</g:link></span>
 
             </li>
         </g:if>
