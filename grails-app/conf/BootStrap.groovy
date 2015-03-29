@@ -54,12 +54,24 @@ class BootStrap {
         def profile2 = Profile.findByPhone("555-555-5556") ?: new Profile(phone: "555-555-5556").save(failOnError: true)
 
 
-        Conversation conversation = Conversation.findByProfileAndStatus(profile2, "Open") ?: new Conversation(profile: profile2, status: "Open").save(failOnError: true)
+        Conversation conversation = Conversation.findByProfileAndStatus(profile2, "Open") ?: new Conversation(profile: profile2, status: "Open", urgencyLevel: "High").save(failOnError: true)
 
 
-        TwilloMessage twilloMessage1 = TwilloMessage.findByConversation(conversation) ?: new TwilloMessage(conversation: conversation, twilloMessageId: "code4good1", sent: DateUtils.addMinutes(new Date(), 1)).save(failOnError: true)
-        TwilloMessage twilloMessage2 = TwilloMessage.findByConversation(conversation) ?: new TwilloMessage(conversation: conversation, twilloMessageId: "code4good1", sent: DateUtils.addMinutes(new Date(), 1)).save(failOnError: true)
-        conversation.addToTwilloMessages(twilloMessage)
+        TwilloMessage twilloMessage1 = TwilloMessage.findByConversation(conversation) ?: new TwilloMessage(isOugoing: false, isSent: false, messageText: "I need help", conversation: conversation, twilloMessageId: "code4good1", sent: DateUtils.addMinutes(new Date(), 1)).save(failOnError: true)
+
+        TwilloMessage twilloMessage2 = TwilloMessage.findByConversation(conversation) ?: new TwilloMessage(isOugoing: false, isSent: false, messageText: "Where can I find housing for the night?", conversation: conversation, twilloMessageId: "code4good1", sent: DateUtils.addMinutes(new Date(), 1)).save(failOnError: true)
+        conversation.addToTwilloMessages(twilloMessage1)
+        conversation.addToTwilloMessages(twilloMessage2)
+        conversation.save(failOnError: true)
+
+        Conversation conversation2 = Conversation.findByProfileAndStatus(profile2, "Open") ?: new Conversation(profile: profile2, status: "Open", urgencyLevel: "High").save(failOnError: true)
+
+
+        TwilloMessage twilloMessage3 = TwilloMessage.findByConversation(conversation) ?: new TwilloMessage(isOugoing: false, isSent: false, messageText: "I don't know what to do", conversation: conversation, twilloMessageId: "code4good1", sent: DateUtils.addMinutes(new Date(), 1)).save(failOnError: true)
+        TwilloMessage twilloMessage4 = TwilloMessage.findByConversation(conversation) ?: new TwilloMessage(isOugoing: false, isSent: false, messageText: "Is there someone I can talk to?", conversation: conversation, twilloMessageId: "code4good1", sent: DateUtils.addMinutes(new Date(), 1)).save(failOnError: true)
+        conversation2.addToTwilloMessages(twilloMessage3)
+        conversation2.addToTwilloMessages(twilloMessage4)
+        conversation2.save(failOnError: true)
 
 
 

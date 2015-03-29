@@ -4,6 +4,7 @@ class Conversation {
 
     static constraints = {
         twilloMessages nullable: true
+        owner nullable: true
     }
 
     static hasMany = [twilloMessages: TwilloMessage]

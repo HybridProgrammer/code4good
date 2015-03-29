@@ -26,7 +26,7 @@
 
             <g:sortableColumn property="dateCreated" title="${message(code: 'conversation.dateCreated.label', default: 'Date Created')}" />
 
-            <g:sortableColumn property="lastUpdated" title="${message(code: 'conversation.lastUpdated.label', default: 'Last Updated')}" />
+            <g:sortableColumn property="phone" title="${message(code: 'conversation.lastUpdated.label', default: 'Phone #')}" />
 
         </tr>
         </thead>
@@ -36,7 +36,7 @@
 
                 <td><g:link action="show" id="${conversationInstance.id}">${fieldValue(bean: conversationInstance, field: "dateCreated")}</g:link></td>
 
-                <td><g:formatDate date="${conversationInstance.lastUpdated}" /></td>
+                <td></td>
 
             </tr>
         </g:each>

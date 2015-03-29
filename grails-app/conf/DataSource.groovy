@@ -14,13 +14,22 @@ hibernate {
 // environment specific settings
 environments {
     development {
+//        dataSource {
+//            driverClassName = "com.mysql.jdbc.Driver"
+//            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+//            username = "jasonhei_code"
+//            password = "C0d34Go0d"
+//            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+//            url = "jdbc:mysql://143.95.38.203/jasonhei_code4good?useUnicode=yes&characterEncoding=UTF-8"
+//        }
+
         dataSource {
             driverClassName = "com.mysql.jdbc.Driver"
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
             username = "code4good"
             password = "C0d34Go0d"
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://10.13.48.82/code4good?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/code4good?useUnicode=yes&characterEncoding=UTF-8"
         }
     }
     test {
