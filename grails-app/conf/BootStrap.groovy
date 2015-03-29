@@ -1,5 +1,6 @@
 import org.apache.commons.lang.time.DateUtils
 import org.code4good.Conversation
+import org.code4good.Notification
 import org.code4good.Profile
 import org.code4good.Role
 import org.code4good.Schedule
@@ -109,6 +110,11 @@ class BootStrap {
         conversation2.save(failOnError: true)
 
 
+        // for demo purposes we clear out our message queue onload
+        def messages = TwilloMessage.findAll()
+        messages.each {
+            Notification.findByTwilloMessage(it) ?: new Notification(twilloMessage: it).save(failOnError: true)
+        }
 
     }
     def destroy = {

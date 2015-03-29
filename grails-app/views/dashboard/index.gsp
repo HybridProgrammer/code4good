@@ -6,6 +6,41 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'conversation.label', default: 'Conversation')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <script type="application/javascript">
+        $( document ).ready(function() {
+            var i = 1;                     //  set your counter to 1
+
+            function poll () {           //  create a loop function
+                setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+                    var conversationCount = $('#messages').children().size()
+                    var conversations = $('#messages').children()
+                    var maxId = 0
+                    $.each( conversations, function( key, value ) {
+                        if(conversations[key].id > maxId) {
+                            maxId = conversations[key].id
+                        }
+                    });
+                    $.ajax({
+                        method: "POST",
+                        url: "newConversations",
+                        data: { maxId: maxId }
+                    })
+                            .done(function( msg ) {
+                                $('#messages').append(msg)
+                            });
+
+
+
+                    poll()                      //  ..  setTimeout()
+                }, 3000)
+            }
+
+            poll();                      //  start the loop
+
+
+
+        });
+    </script>
 </head>
 <body>
 <a href="#list-conversation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -13,6 +48,7 @@
     <ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
         <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+        <li><a class="create" href="http://10.11.48.53:8888/code4good/schedule.phtml"><g:message code="default.schedule.label" default="Schedule"/></a></li>
     </ul>
 </div>
 <div id="list-conversation" class="content scaffold-list" role="main">
@@ -34,9 +70,9 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody id="messages">
         <g:each in="${conversationInstanceList}" status="i" var="conversationInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+            <tr id="${conversationInstance.id}" class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
                 <td><g:link action="showHistory" id="${conversationInstance.id}"><g:getOwner conversation="${conversationInstance}" /></g:link></td>
 

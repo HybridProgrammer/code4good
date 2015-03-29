@@ -144,3 +144,15 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 ]
 
+grails.mail.default.from="donotreply@fau.edu"
+grails {
+    mail {
+        host = "smtp.fau.edu"
+        pop_port = 25
+        username = ""
+        password = ""
+
+    }
+}
+
+org.code4good.default.email='jheithof@fau.edu'
