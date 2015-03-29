@@ -48,7 +48,7 @@
 					
 						<td><g:formatDate date="${conversationInstance.lastUpdated}" /></td>
 					
-						<td><g:link action="show" id="${conversationInstance.id}">${conversationInstance.profile.phone}</g:link></td>
+						<td>${fieldValue(bean: conversationInstance, field: "profile")}</td>
 					
 						<td>${fieldValue(bean: conversationInstance, field: "status")}</td>
 					
