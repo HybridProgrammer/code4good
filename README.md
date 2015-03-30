@@ -5,6 +5,7 @@ Demo of the project we presented at [Code4Good](http://code4goodpbc.org/) 2015 H
 
 # The Organization
 * Vita Nova: www.vitanovainc.org
+
 Vita Nova has three locations that provide services for older foster youth ages 18-25. These include our residential apartments,
 main office and thrift store.
 On any given day, and any given location we are presented with challenges related to a young person disconnected from
