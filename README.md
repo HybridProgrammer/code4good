@@ -8,10 +8,12 @@ Demo of the project we presented at [Code4Good](http://code4goodpbc.org/) 2015 H
 
 Vita Nova has three locations that provide services for older foster youth ages 18-25. These include our residential apartments,
 main office and thrift store.
+
 On any given day, and any given location we are presented with challenges related to a young person disconnected from
 resources after leaving foster care. These include: homelessness, hunger, lost important documentation, missing healthcare or
 help with work or school. Calls from recipients start as early as 7:30 some mornings and a we find that most crisis happen on
 holidays or Fridays after 4:30pm.
+
 No matter what the situation or when we get a call our participants are always treated with a sense of respect and urgency. We
 know that every interaction from Vita Nova has the potential to save or improve a life.
 
