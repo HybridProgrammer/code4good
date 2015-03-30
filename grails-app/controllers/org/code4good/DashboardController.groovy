@@ -8,6 +8,7 @@ class DashboardController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        notificationService.processNewMessages()
 //        def conversations = Conversation.findAllByStatus("Open")
         def c = Conversation.createCriteria()
         def conversations = c.list {
@@ -15,7 +16,7 @@ class DashboardController {
             order("urgencyLevel", "asc")
             order("dateCreated", "desc")
         }
-        notificationService.processNewMessages()
+
         [conversationInstanceList: conversations.toList(), conversationInstanceCount: conversations.size()]
     }
 
@@ -24,6 +25,7 @@ class DashboardController {
     }
 
     def newConversations(Long maxId) {
+        notificationService.processNewMessages()
         def c = Conversation.createCriteria()
         def conversations = c.list {
             eq("status", "Open")

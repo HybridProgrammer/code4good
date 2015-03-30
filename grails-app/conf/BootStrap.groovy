@@ -32,8 +32,8 @@ class BootStrap {
         log.info "Created user admin/admin."
 
 
-        def user = User.findByUsername('socialworker1') ?: new User(
-                username: 'socialworker1',
+        def user = User.findByUsername('John Smith') ?: new User(
+                username: 'John Smith',
                 //password: springSecurityService.encodePassword('admin'),
                 password: 'socialworker1',
                 enabled: true).save(failOnError: true)
@@ -42,8 +42,8 @@ class BootStrap {
             UserRole.create user, userRole
         }
 
-        def user2 = User.findByUsername('socialworker2') ?: new User(
-                username: 'socialworker2',
+        def user2 = User.findByUsername('Jane Tayler') ?: new User(
+                username: 'Jane Tayler',
                 //password: springSecurityService.encodePassword('admin'),
                 password: 'socialworker2',
                 enabled: true).save(failOnError: true)

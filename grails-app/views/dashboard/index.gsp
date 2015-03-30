@@ -72,7 +72,7 @@
         </thead>
         <tbody id="messages">
         <g:each in="${conversationInstanceList}" status="i" var="conversationInstance">
-            <tr id="${conversationInstance.id}" class="${(i % 2) == 0 ? 'even' : 'odd'}">
+            <tr id="${conversationInstance.id}" class="${conversationInstance.urgencyLevel.equalsIgnoreCase("High") ? 'urgent' : 'even'}">
 
                 <td><g:link action="showHistory" id="${conversationInstance.id}"><g:getOwner conversation="${conversationInstance}" /></g:link></td>
 

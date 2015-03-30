@@ -15,12 +15,6 @@ hibernate {
 environments {
     development {
         dataSource {
-            driverClassName = "com.mysql.jdbc.Driver"
-            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-            username = "jasonhei_code"
-            password = "C0d34Go0d"
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://143.95.38.203/jasonhei_code4good?useUnicode=yes&characterEncoding=UTF-8"
             properties {
 /** The maximum number of active connections that can be allocated from
  * this pool at the same time, or zero for no limit.
@@ -64,6 +58,8 @@ environments {
 //            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
 //            url = "jdbc:mysql://localhost/code4good?useUnicode=yes&characterEncoding=UTF-8"
 //        }
+        dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+        url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
     }
     test {
         dataSource {
